@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: virtual-thread
+
+  # Actuator 설정
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health,metrics,info,threaddump
+    endpoint:
+      health:
+        show-details: always
+      threaddump:
+        enabled: true
+
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+  # Virtual Thread 설정
+  executors:
+    virtual-threads:
+      enabled: true
+
+# 로깅 설정
+logging:
+  level:
+    com.example.virtualthread: DEBUG
+    org.springframework.web: INFO
